@@ -10,3 +10,8 @@ Used the drop_first parameter in the get_dummies function to drop one of the col
 Scaled the numerical features using the StandardScaler function to ensure that they are on the same scale. This is important because some machine learning algorithms require features to be on the same scale for optimal performance.
 
 Classified the types of communication based on the communication channel and the product or service offered. We created a new column called "communication_type" and assigned labels based on the combination of communication channel and product/service. For example, if the communication channel was "email" and the product/service was "credit card," the communication type was labeled as "email_credit_card". This helped us identify which types of communication were most effective in retaining customers and preventing churn.
+
+
+
+
+For sentiment analysis, we used the Hugging Face model to classify each communication as either positive or negative. The Hugging Face model is a pre-trained natural language processing model that uses a transformer architecture to analyze text data. We used the model to predict the sentiment of each customer's communication with the bank, as well as the bank's response to the customer. We only considered two categories - positive and negative -
