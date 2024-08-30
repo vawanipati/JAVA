@@ -1,5 +1,7 @@
 To calculate the number of qubits required for a fingerprint search using Grover's algorithm, we'll consider the following steps:
 
+https://chatgpt.com/share/ebb3cc19-96f8-4972-8477-324482e1f14f
+
 ### 1. **Estimate the Number of Fingerprint Entries**
    - Suppose the Reserve Bank of India (RBI) stores fingerprints for all banking customers in India. As of recent estimates, India has over **1.4 billion** people, but let's conservatively estimate that **500 million** banking customers have their fingerprints stored.
 
