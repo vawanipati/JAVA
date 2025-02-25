@@ -1,0 +1,47 @@
+// Get the model package and MM Model
+def header = "Capabilities1", "Capability2"
+def eaFolder = modelPackage.getObject("2", "Enterprise Catalog", "MM Folder")
+def eaModel = eaFolder.getObject("1", "MM Model", "MM Model")
+
+// Create a list to store capabilities without hierarchical relationships
+def eaModelCapList = []
+
+// Add all StrategyCapability elements to the list
+for (al in eaModel) {
+    if (al.type == "Archimate:StrategyCapability") {
+        eaModelCapList.add(al)
+    }
+}
+
+// Filter capabilities without a hierarchical parent relationship
+def capabilitiesWithoutHierarchy = []
+for (capability in eaModelCapList) {
+    def hasHierarchicalParent = false
+    def parentList = []
+    
+    // Check all relationships for the capability
+    for (rel in capability.relations()) {
+        def relatedObj = rel.relatedTo(capability)
+        
+        // Check if the relationship is a hierarchical one (e.g., Composition or Aggregation)
+        if (rel.type in ["Archimate:Composition", "Archimate:Aggregation"]) {
+            if (relatedObj.type == "Archimate:StrategyCapability") {
+                hasHierarchicalParent = true
+                parentList.add(relatedObj)
+            }
+        }
+    }
+    
+    // If no hierarchical parent exists, add to the result list
+    if (!hasHierarchicalParent) {
+        capabilitiesWithoutHierarchy.add(capability)
+    }
+}
+
+// Sort the results by name or ID (assuming 'name' is a property)
+capabilitiesWithoutHierarchy.sort { it.name }
+
+// Output the results
+for (cap in capabilitiesWithoutHierarchy) {
+    output cap.name, cap.id
+}
